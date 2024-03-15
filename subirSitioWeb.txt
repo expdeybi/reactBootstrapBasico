@@ -1,0 +1,114 @@
+Pasos para subir el proyecto completo con su codigo fuente en Github
+--------------------------------------------------------------------
+
+Requisito: Tener creado un repositorio en github
+
+Desde vs-code seguir los siguientes pasos:
+
+    a) git init
+        Nota: Crear un repositorio de Git vacio localmente
+              Se crea el directorio oculto ".git"
+
+    b) git add .
+        Este comando se utiliza para agregar archivos al área de
+        preparación (staging area) antes de realizar una confirmación (commit).
+        Modifica el directorio .git/objects
+
+    c) Ejecutar los comandos:
+            git config --global user.email "you@example.com"
+            git config --global user.name "UserName"
+        Nota: Estos comandos sirven para conectar Git a tu usuario de github
+
+    d) git commit -m "Primer commit"
+        Nota: Este comando se utiliza para confirmar los cambios
+        realizados en los archivos agregados al área de preparación
+
+    e) git branch -M main
+        Nota: Crea una rama (branch) en el repositorio 
+
+    f) git remote add origin https://github.com/nombreUsuario/nombreRepositorio.git
+        Nota: Asocia esta rama con el repositorio remoto de github
+
+    g) git push -u origin main
+        Nota: Este comando se utiliza para enviar los cambios confirmados
+        al repositorio remoto (https://github.com/nombreUsuario/nombreRepositorio.git). 
+        En otras palabra sube el sitio
+
+        Nota: En el caso de linux se va a pedir un token que fue generado desde
+        github desde la opcion: Settings -> Developer Setting -> Personal access tokens 
+        Luego seleccionar classic token y seleccionar todos los checkboxes
+        del formulario y presionar el boton "Generar new token"
+
+
+Preparar sitio web para publicar en github
+------------------------------------------
+
+Requisito: Tener creado un repositorio en github
+
+Desde vs-code seguir los siguientes pasos:
+
+    1) npm i gh-pages
+
+    2) En el archivo vite.config.js agregar base: nombreUsuario.github.io/nombreRepositorio
+
+	    export default defineConfig({
+	        plugins: [react()],
+            base: "https://nombreUsuario.github.io/nombreRepositorio",
+	    })
+		    
+    2) En archivo package.json agregar en la seccion "script" las lineas:
+       "predeploy": "npm run build" y "deploy": "gh-pages -d dist"
+       Ahora este archivo en esa seccion debe ser asi:
+
+            "scripts": {
+                "dev": "vite",
+                "build": "vite build",
+                "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
+                "preview": "vite preview",
+                "predeploy": "npm run build",
+                "deploy": "gh-pages -d dist" 
+            },
+
+    3) Para crear el directorio dist ejecutar:
+        npm run build
+
+
+Para subir la carpeta dist (Caso: React) para desplegar el sitio web
+(Html, Css, Js)
+---------------------------------------------------------------------
+    Una vez que funcione bien la pagina realizar los siguientes pasos:
+
+Requisito: Tener git instalado
+
+1) Desde github crear el repositorio astroBasico
+
+2) Desde un terminal en vs code:
+
+    a) git init
+
+    b) git add .
+
+    c) Ejecutar los comandos:
+            git config --global user.email "you@example.com"
+            git config --global user.name "UserName"
+
+    f) git remote add origin https://github.com/nombreUsuario/nombreRepositorio.git
+        Nota: Asocia esta rama con el repositorio remoto de github
+
+    g) npm run deploy
+        Nota: Este comando se utiliza para enviar los cambios confirmados
+        al repositorio remoto de github.
+        En otras palabra sube el sitio web (carpeta dist)
+        Esto creara la rama gh-pages en github donde almacenara los archivos
+        y directorios dentro del directorio dist (local).
+        Por medio de este comando va a autenticar al usuario del repositorio
+        de github y en password va a pedir la clave del token.
+
+        Este comnado automaticamente publica el sitio web sin necesidad de hacer
+        el paso de "Configurar GitHub Pages para desplegar la pagina" desde linux.
+
+        Nota: En el caso de linux se va a pedir un token que fue generado desde
+        github desde la opcion: Settings -> Developer Setting -> Personal access tokens 
+        Luego seleccionar classic token y seleccionar todos los checkboxes
+        del formulario y presionar el boton "Generar new token"
+
