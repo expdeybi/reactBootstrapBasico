@@ -69,10 +69,6 @@ Desde vs-code seguir los siguientes pasos:
                 "deploy": "gh-pages -d dist" 
             },
 
-    3) Para crear el directorio dist ejecutar:
-        npm run build
-
-
 Para subir la carpeta dist (Caso: React) para desplegar el sitio web
 (Html, Css, Js)
 ---------------------------------------------------------------------
